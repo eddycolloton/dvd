@@ -98,7 +98,7 @@ select diskImage_option in "yes" "no"
 			esac
 	done
 
-echo "Create concated video file from the DVD's VOB files?"
+echo -e "\n \n Create concated video file from the DVD's VOB files?"
 select concatVideo_option in "yes" "no" 
 	do
 		case $concatVideo_option in
@@ -117,7 +117,7 @@ select concatVideo_option in "yes" "no"
 						fi
 					if [[ "$codec" = *"ac3"* ]]
 					then 
-						echo "ac3 codec found - audio will not be re-encoded"
+						echo -e "ac3 codec found - audio will not be re-encoded \n"
 						acodec="copy"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -131,7 +131,7 @@ select concatVideo_option in "yes" "no"
 								esac
 							done
 					elif [[ "$codec" = *"pcm"* ]]; then
-						echo "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio"
+						echo -e "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio \n"
 						acodec="pcm_s16be"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -149,7 +149,7 @@ select concatVideo_option in "yes" "no"
 						codec2=$(ffprobe "${TestVOB2}" 2>&1 >/dev/null | grep -i "Audio" | awk 'NR == 1' | sed -e 's/.*Audio: //' -e 's/[, ].*//')
 						if [[ "$codec2" = *"ac3"* ]]
 						then 
-						echo "ac3 codec found in $TestVOB2 - audio will not be re-encoded"
+						echo -e "ac3 codec found in $TestVOB2 - audio will not be re-encoded \n"
 						acodec="copy"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -163,7 +163,7 @@ select concatVideo_option in "yes" "no"
 								esac
 							done
 						else
-						echo "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio"
+						echo -e "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio \n"
 						acodec="pcm_s16be"
 						#This doesn't account for DVDs with no audio, need to add something for that
 						sleep 1
@@ -191,7 +191,8 @@ select concatVideo_option in "yes" "no"
 					cowsay -g "Reading disc for Volume name"
 					sleep 1
 					volumes=$(df | sed -En 's~.* (/Volumes/.+)$~\1~p' | sed 's|.*/Volumes/||')
-					echo -e "The following volumes are connected \n $volumes" 
+					echo -e "The following volumes are connected \n $volumes \n" 
+					sleep 1
 					echo "If necessary enter your user password to give terminal access to the disc drive:"
 					sleep 1
 					sudo diskutil umount $Device
@@ -209,7 +210,7 @@ select concatVideo_option in "yes" "no"
 					fi
 					if [[ "$codec" = *"ac3"* ]]
 					then 
-						echo "ac3 codec found - audio will not be re-encoded"
+						echo -e "ac3 codec found - audio will not be re-encoded \n"
 						acodec="copy"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -223,7 +224,7 @@ select concatVideo_option in "yes" "no"
 								esac
 							done
 					elif [[ "$codec" = *"pcm"* ]]; then
-						echo "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio"
+						echo -e "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio \n"
 						acodec="pcm_s16be"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -241,7 +242,7 @@ select concatVideo_option in "yes" "no"
 						codec2=$(ffprobe "${TestVOB2}" 2>&1 >/dev/null | grep -i "Audio" | awk 'NR == 1' | sed -e 's/.*Audio: //' -e 's/[, ].*//')
 						if [[ "$codec2" = *"ac3"* ]]
 						then 
-						echo "ac3 codec found in $TestVOB2 - audio will not be re-encoded"
+						echo -e "ac3 codec found in $TestVOB2 - audio will not be re-encoded \n"
 						acodec="copy"
 						sleep 1
 						echo "Seperate chapters into seperate files?"
@@ -255,7 +256,7 @@ select concatVideo_option in "yes" "no"
 								esac
 							done
 						else
-						echo "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio"
+						echo -e "The audio will need to be re-encoded, using 16bit 48 kHz PCM audio \n"
 						acodec="pcm_s16be"
 						sleep 1
 						#This doesn't account for DVDs with no audio, need to add something for that
