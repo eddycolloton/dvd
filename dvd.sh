@@ -10,7 +10,7 @@ function chapters {
 	for x in "${chapterNUM[@]}"; do
 		find /Volumes/"${VolumeName}" -iname "VTS_${x}_[1-9].VOB" | sort | sed -e :a -e '$!N;s/\n/|/;ta' >> "${Destination%/}"/VOB_names_"${timestamp}".txt
 	done	
-	chapterLIST=($(cat VOB_names_"${timestamp}".txt))
+	chapterLIST=($(cat "${Destination%/}"/VOB_names_"${timestamp}".txt))
 	COUNTER=1
 	for y in "${chapterLIST[@]}"; do
 		echo "The ffmpeg input will be ${y}"
@@ -53,8 +53,9 @@ select diskImage_option in "yes" "no"
 				#Creates the variable $volumes with a list of mounted volumes (ignores Mac HD and time machine backups) 
 				#lifted from: https://stackoverflow.com/questions/61107000/list-volumes-with-df-grep-awk-bash-shell
 				#just added sed 's|.*/Volumes/||' to remove the "/Volumes/" from the output
-				echo -e "The following volumes are connected \n $volumes" 
+				echo -e "**This output is for testing** \n The following volumes are connected \n $volumes \n This list will now be comparted with the device names found with disktype to confirm the voume name of the dvd \n" 
 				#This echo is in here for testing, will cut eventually - it's confusing to get a long list of volumes in the middle of this process...
+				sleep 1
 				echo "If necessary enter your user password to give terminal access to the disc drive"
 				sleep 1
 				sudo diskutil umount $Device
@@ -63,9 +64,11 @@ select diskImage_option in "yes" "no"
 				#The disktype output is piped to grep, which then prints a line that matches the first 16 characters of any line (UDF volume names are limited to 16 characters) in the $volumes variable. awk then prints the first field of the first line that grep returns. 
 				#The output from the process described in the comment above is then used to match the volume named gathered earlier in the $volume variable using "echo "$volumes" | grep -i". This is necessary because while the volume name might be limited depending ont he file system of the partition, it may be presented to the user differently.
 				echo -e "The Volume name is $VolumeName \n"
+				sleep 1
 				echo -e "Creating checksum of device prior to disk imaging (this could take minute)"
-				md5 $Device > "${Destination}/${VolumeName}_device_md5.txt"
+				pv $Device | md5 > "${Destination}/${VolumeName}_device_md5.txt"
 				#creates md5 checksum of the device. I prefer md5deep -e because it gives the user feedback of an eta, but md5deep would not work on a device path in my tests
+				#trying out pv instead. It adds a dependency but it will give the user some feedback on the md5 process, instead of just ablinking cursor...
 				echo -e "Checksum of $Device complete"
 				cat "${Destination}/${VolumeName}_device_md5.txt"
 				sleep 1
@@ -81,12 +84,14 @@ select diskImage_option in "yes" "no"
 				#diffs the md5 checksums of the device and the disk image, if there is no difference, the ouptu will be empty
 				if [[ $checkmd5 -eq 0 ]]; then
 					echo "Device and disk image checksums match"
+					sleep 1
 				else
 					echo "Device and disk image checksums do not match!"
 					diff -y "${Destination}/${VolumeName}_device_md5.txt" "${Destination%/}/${VolumeName}_diskImage_md5.txt"
 					#prints the diff of the two checksums
+					sleep 2
 				fi  
-				#need to remount the dvd once the disk image is done 
+				sudo diskutil mount $Device
 			break;;
 			no) echo "moving on..."
 			break;;
