@@ -8,7 +8,7 @@ function chapters {
 	#The above was working fine for the Sawa disk image and Amorales DVD, but did not work when I tried with an iso9660
 	chapterNUM=(` find /Volumes/"${VolumeName}" -iname "VTS*[1-9].VOB" | sed 's|.*VTS_||' |  cut -c-2 | sort -u`)
 	for x in "${chapterNUM[@]}"; do
-		find /Volumes/"${VolumeName}" -iname "VTS_${x}_[1-9].VOB" | sort | sed -e :a -e '$!N;s/\n/|/;ta' >> VOB_names_"${timestamp}".txt
+		find /Volumes/"${VolumeName}" -iname "VTS_${x}_[1-9].VOB" | sort | sed -e :a -e '$!N;s/\n/|/;ta' >> "${Destination%/}"/VOB_names_"${timestamp}".txt
 	done	
 	chapterLIST=($(cat VOB_names_"${timestamp}".txt))
 	COUNTER=1
@@ -86,6 +86,7 @@ select diskImage_option in "yes" "no"
 					diff -y "${Destination}/${VolumeName}_device_md5.txt" "${Destination%/}/${VolumeName}_diskImage_md5.txt"
 					#prints the diff of the two checksums
 				fi  
+				#need to remount the dvd once the disk image is done 
 			break;;
 			no) echo "moving on..."
 			break;;
