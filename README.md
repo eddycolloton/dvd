@@ -1,7 +1,7 @@
 # “dvd.sh”
 
 ### Scripts
-**dvd.sh***: Bash script file which allows the user to disk image and/or extract video files from non-commercial DVDs. All of the code and functions for the dvd.sh script are contained in one file.
+**dvd.sh**: Bash script file which allows the user to disk image and/or extract video files from non-commercial DVDs. All of the code and functions for the dvd.sh script are contained in one file.
 
 ### Dependencies
 The script relies on a number of command line applications that can be installed through homebrew:
