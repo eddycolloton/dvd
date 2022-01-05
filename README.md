@@ -45,5 +45,5 @@ If the scripts finish successfully, there should be the following results:
 - If you opt to extract the video from the dvd:
   - An MKV video file with the video stream from the original VOB files and, if the audio was originally encoded as ac3, the audio stream from the original VOB files as well. If the audio was encoded in PCM, then it will be re-encoded. It will still use the PCM codec but it must be re-encoded to work in a non-VOB file. 
   - Or, multiple MKV files for each DVD chapter, if so desired. 
-  - If you opted to create a disk image, then the video files will be created from the disk image, instead of from the DVD (this is after and results in less wear and tear on the DVD.
+  - If you opted to create a disk image, then the video files will be created from the disk image, instead of from the DVD (this is faster and results in less wear and tear on the DVD.
 
