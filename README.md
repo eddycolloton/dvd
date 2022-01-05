@@ -36,14 +36,14 @@ The other location you will need to enter manually is the path to the destinatio
 ## Results
 If the scripts finish successfully, there should be the following results:
 - If you opt to create a disk image from the DVD:
--- A disk image of the DVD
--- A “.map” file of the disk image created by ddrescue 
--- The map file is a log of the disk imaging process
--- A text file containing a md5 checksum of the DVD
--- A text file containing the md5 checksum of the disk image
---- The script compares these two files and alerts you if there is a match or if there is a mismatch
+       - A disk image of the DVD
+       - A “.map” file of the disk image created by ddrescue 
+       - The map file is a log of the disk imaging process
+       - A text file containing a md5 checksum of the DVD
+       - A text file containing the md5 checksum of the disk image
+              - The script compares these two files and alerts you if there is a match or if there is a mismatch
 - If you opt to extract the video from the dvd:
--- An MKV video file with the video stream from the original VOB files and, if the audio was originally encoded as ac3, the audio stream from the original VOB files as well. If the audio was encoded in PCM, then it will be re-encoded. It will still use the PCM codec but it must be re-encoded to work in a non-VOB file. 
--- Or, multiple MKV files for each DVD chapter, if so desired. 
--- If you opted to create a disk image, then the video files will be created from the disk image, instead of from the DVD (this is after and results in less wear and tear on the DVD.
+       - An MKV video file with the video stream from the original VOB files and, if the audio was originally encoded as ac3, the audio stream from the original VOB files as well. If the audio was encoded in PCM, then it will be re-encoded. It will still use the PCM codec but it must be re-encoded to work in a non-VOB file. 
+       - Or, multiple MKV files for each DVD chapter, if so desired. 
+       - If you opted to create a disk image, then the video files will be created from the disk image, instead of from the DVD (this is after and results in less wear and tear on the DVD.
 
