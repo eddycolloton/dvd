@@ -90,6 +90,7 @@ select diskImage_option in "yes" "no"
 					diff -y "${Destination}/${VolumeName}_device_md5.txt" "${Destination%/}/${VolumeName}_diskImage_md5.txt"
 					#prints the diff of the two checksums
 					sleep 2
+					exit 1
 				fi  
 				sudo diskutil mount $Device
 			break;;
