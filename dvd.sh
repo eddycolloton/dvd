@@ -53,7 +53,7 @@ select diskImage_option in "yes" "no"
 				#Creates the variable $volumes with a list of mounted volumes (ignores Mac HD and time machine backups) 
 				#lifted from: https://stackoverflow.com/questions/61107000/list-volumes-with-df-grep-awk-bash-shell
 				#just added sed 's|.*/Volumes/||' to remove the "/Volumes/" from the output
-				echo -e "**This output is for testing** \n The following volumes are connected \n $volumes \n This list will now be comparted with the device names found with disktype to confirm the voume name of the dvd \n" 
+				#echo -e "**This output is for testing** \n The following volumes are connected \n $volumes \n This list will now be compared with the device names found with disktype to confirm the voume name of the dvd \n" 
 				#This echo is in here for testing, will cut eventually - it's confusing to get a long list of volumes in the middle of this process...
 				sleep 1
 				echo "If necessary enter your user password to give terminal access to the disc drive"
@@ -192,7 +192,8 @@ select concatVideo_option in "yes" "no"
 					cowsay -g "Reading disc for Volume name"
 					sleep 1
 					volumes=$(df | sed -En 's~.* (/Volumes/.+)$~\1~p' | sed 's|.*/Volumes/||')
-					echo -e "The following volumes are connected \n $volumes \n" 
+					#echo -e "**This is for testing** The following volumes are connected \n $volumes \n" 
+					#This echo is in here for testing, will cut eventually - it's confusing to get a long list of volumes in the middle of this process...
 					sleep 1
 					echo "If necessary enter your user password to give terminal access to the disc drive:"
 					sleep 1
